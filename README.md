@@ -9,3 +9,5 @@ La aplicación utiliza una base de datos MySQL. La configuracion del dataSource 
 
 Además, en la carpeta "src/main/resources/static" se encuentra un fichero 'schema.txt' en el que hay un script para la creación tanto de las tablas como de cargar unos datos de prueba iniciales.
 
+
+Al arrancar la aplicacion (Tomcat embebido de Spring) se puede acceder mediante la url "http://localhost:8080/series"
