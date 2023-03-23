@@ -1,0 +1,51 @@
+-- CREACION de la tabla USUARIO
+CREATE TABLE USUARIO (
+id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL UNIQUE,
+nombre VARCHAR (50) NOT NULL);
+
+-- CREACION de la tabla SERIE
+CREATE TABLE SERIE (
+id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL UNIQUE,
+titulo VARCHAR (100) NOT NULL,
+sinopsis VARCHAR (400) NOT NULL,
+plataforma_id INTEGER,
+caratula VARCHAR(50));
+
+-- CREACION de la tabla PLATAFORMA
+CREATE TABLE PLATAFORMA (
+id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL UNIQUE,
+nombre VARCHAR (30) NOT NULL);
+
+-- CREACION de la tabla VALORACION
+CREATE TABLE VALORACION (
+usuario_id INTEGER NOT NULL,
+serie_id INTEGER NOT NULL,
+nota FLOAT NOT NULL,
+comentario VARCHAR (400) NOT NULL);
+
+-- FOREIGN KEYS de las tablas
+ALTER TABLE SERIE ADD CONSTRAINT SERIE_plataforma_id_PLATAFORMA_id FOREIGN KEY (plataforma_id) REFERENCES PLATAFORMA(id) ON DELETE SET NULL ON UPDATE SET NULL;
+ALTER TABLE VALORACION ADD CONSTRAINT VALORACION_usuario_id_USUARIO_id FOREIGN KEY (usuario_id) REFERENCES USUARIO(id) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE VALORACION ADD CONSTRAINT VALORACION_serie_id_SERIE_id FOREIGN KEY (serie_id) REFERENCES SERIE(id) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+-- INSERTS para la tabla USUARIO
+INSERT INTO USUARIO (nombre) VALUES ('Juan');
+INSERT INTO USUARIO (nombre) VALUES ('María');
+INSERT INTO USUARIO (nombre) VALUES ('Pedro');
+
+-- INSERTS para la tabla PLATAFORMA
+INSERT INTO PLATAFORMA (nombre) VALUES ('Netflix');
+INSERT INTO PLATAFORMA (nombre) VALUES ('Amazon Prime Video');
+INSERT INTO PLATAFORMA (nombre) VALUES ('HBO');
+
+-- INSERTS para la tabla SERIE
+INSERT INTO SERIE (nombre, sinopsis, plataforma_id, caratula) VALUES 
+    ('Stranger Things', 'En los años 80, en Hawkins, Indiana, un niño desaparece sin dejar rastro. La madre, la policía local y sus amigos se adentran en una enigmática aventura para encontrarlo.', 1, null),
+    ('The Boys', 'Un grupo de vigilantes que buscan venganza contra los superhéroes corruptos que abusan de sus superpoderes.', 2, null),
+    ('Game of Thrones', 'Las familias más poderosas de los Siete Reinos se disputan el Trono de Hierro en una serie llena de traiciones, sexo y violencia.', 3, null);
+
+-- INSERTS para la tabla VALORACION
+INSERT INTO VALORACION (usuario_id, serie_id, nota, comentario) VALUES (1, 1, 4.5, 'Excelente serie');
+INSERT INTO VALORACION (usuario_id, serie_id, nota, comentario) VALUES (2, 1, 3.8, 'Buena pero sobrevalorada');
+INSERT INTO VALORACION (usuario_id, serie_id, nota, comentario) VALUES (1, 2, 4.2, 'Muy buena serie de superhéroes');

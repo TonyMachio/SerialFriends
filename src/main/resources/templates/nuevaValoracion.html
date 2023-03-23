@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Valorar Serie</title>
+<link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+<body>
+	<header>
+		<div th:replace="~{header :: menu}"></div>
+	</header>
+	<h1>Valorar Serie</h1>
+	<form th:action="@{/series/nuevaValoracion}" method="post">
+		<div>
+			<label>Usuario *:</label> <select name="usuario" required >
+				<option th:each="usuario : ${usuarios}" th:value="${usuario.id}"
+					th:text="${usuario.nombre}"></option>
+			</select>
+		</div>
+		<div>
+			<label>Serie *:</label> <select name="serie" required>
+				<option th:each="serie : ${series}" th:value="${serie.id}"
+					th:text="${serie.titulo}"></option>
+			</select>
+		</div>
+		<div>
+			<label>Nota *:</label> <input type="number" name="nota" value = "5.0" th:min="0.0"
+				th:max="10.0" th:step="0.1" required/>
+		</div>
+		<div>
+			<label>Comentario:</label>
+			<textarea name="comentario"></textarea>
+		</div>
+		<button type="submit">Guardar Valoración</button>
+		<br>
+		<br>
+		<br>
+	</form>
+</body>
+</html>

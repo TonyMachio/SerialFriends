@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Valoraciones</title>
+<link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+<body>
+	<header>
+		<div th:replace="~{header :: menu}"></div>
+	</header>
+	<h1>Valoraciones</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>Carátula</th>
+				<th>Título</th>
+				<th>Plataforma</th>
+				<th>Valoraciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="serie : ${series}">
+				<td><img th:src="@{'/caratulas/' + ${serie.caratula}}" alt="${serie.titulo}"></td>
+				<td th:text="${serie.titulo}"></td>
+				<td th:text="${serie.plataforma.nombre}"></td>
+				<td>
+					<table>
+						<tbody>
+							<tr th:each="valoracion : ${serie.valoraciones}">
+								<td th:text="${valoracion.usuario.nombre}"></td>
+								<td th:text="${valoracion.nota}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

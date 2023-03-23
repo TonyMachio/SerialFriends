@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Agregar nueva serie</title>
+<link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+<body>
+	<header>
+		<div th:replace="~{header :: menu}"></div>
+	</header>
+	<h1>Agregar nueva serie</h1>
+	<form th:action="@{/series/nuevaSerie}" method="post" enctype="multipart/form-data">
+		<label for="titulo">Título *:</label> <input type="text" id="titulo"
+			name="titulo" required> <br> <label for="sinopsis">Sinopsis *:</label>
+		<textarea id="sinopsis" name="sinopsis" required></textarea>
+		<br> <label for="plataforma">Plataforma *:</label> <select
+			id="plataforma" name="plataforma" required>
+			<option value="">Selecciona una plataforma</option>
+			<option th:each="plataforma : ${plataformas}"
+				th:value="${plataforma.id}" th:text="${plataforma.nombre}"></option>
+		</select>
+		<label for="imagen">Carátula *:</label>
+  		<input type="file" id="caratula" name="caratulaFile" accept="image/*" required>
+		<button type="submit">Agregar serie</button>
+		<br>
+		<br>
+		<br>
+		<br>
+	</form>
+</body>
+</html>
